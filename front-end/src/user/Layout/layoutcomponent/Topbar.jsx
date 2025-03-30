@@ -1,70 +1,88 @@
-import React, { useState } from "react";
-import { AppBar, Toolbar, Avatar, Menu, MenuItem, Tab, Tabs } from "@mui/material";
+import React from "react";
+import PropTypes from "prop-types";
+import { useNavigate } from "react-router-dom";
+import { AppBar, Toolbar, Avatar, Tab, Tabs, Button } from "@mui/material";
 import SPARTA_LOGO from "../../../assets/SPARTA.png";
+import { deepOrange } from "@mui/material/colors";
 
-const Topbar = () => {
-  const [anchorEl, setAnchorEl] = useState(null);
-  const open = Boolean(anchorEl);
+const Topbar = ({ selectedTab, onTabChange }) => {
+  const navigate = useNavigate();
 
-  // State for Tabs
-  const [value, setValue] = useState("one");
-
-  const handleMenuClick = (event) => {
-    setAnchorEl(event.currentTarget);
+  const tabRoutes = {
+    HOME: "/home",
+    NOTIFICATION: "/notification",
+    PROFILE: "/profile",
   };
 
-  const handleMenuClose = () => {
-    setAnchorEl(null);
+  const handleTabChange = (event, newValue) => {
+    onTabChange(newValue);
+    navigate(newValue);
   };
 
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
-
-  const userName = "John Doe"; // Example user name
-  const userInitial = userName.charAt(0).toUpperCase(); // First letter of the user name
+  const userName = "John Doe";
+  const userInitial = userName.charAt(0).toUpperCase();
 
   return (
     <AppBar position="static" style={{ backgroundColor: "#78C0E0" }} elevation={0}>
       <Toolbar className="flex justify-between">
-        {/* Left Side: Logo */}
         <img src={SPARTA_LOGO} alt="SPARTA Logo" className="h-8 w-auto" />
 
-        {/* Right Side: Tabs */}
-        <div className="flex items-center space-x-4">
+        <div className="flex items-center space-x-20">
           <Tabs
-            value={value}
-            onChange={handleChange}
+            value={selectedTab}
+            onChange={handleTabChange}
             textColor="inherit"
             indicatorColor="secondary"
-            aria-label="navigation tabs"
+            sx={{
+              "& .MuiTab-root": {
+                fontWeight: "bold",
+                fontSize: "17px",
+                color: "black",
+                minWidth: "120px",
+                margin: "0 12px",
+              },
+              "& .Mui-selected": {
+                color: "white",
+              },
+              "& .MuiTabs-indicator": {
+                backgroundColor: "#0000FF",
+              },
+            }}
           >
-            <Tab value="one" label="Home" />
-            <Tab value="two" label="Notification" />
-            <Tab value="three" label="Profile" />
+            {Object.entries(tabRoutes).map(([key, path]) => (
+              <Tab key={key} value={path} label={key} />
+            ))}
           </Tabs>
 
-          {/* Profile Avatar */}
-          <div className="flex items-center space-x-2">
-            <Avatar
-              className="bg-white text-green-500 cursor-pointer"
-              onClick={handleMenuClick}
+          <div className="flex items-center space-x-4">
+            <Avatar sx={{ bgcolor: deepOrange[500] }}>{userInitial}</Avatar>
+            <Button
+              variant="contained"
+              sx={{
+                height: "35px",
+                width: "100px",
+                backgroundColor: "white",
+                fontWeight: "semibold",
+                fontSize: "16px",
+                color: "#FC0000",
+                "&:hover": {
+                  backgroundColor: "#FC0000",
+                  color: "white",
+                },
+              }}
             >
-              {userInitial}
-            </Avatar>
-            <Menu
-              anchorEl={anchorEl}
-              open={open}
-              onClose={handleMenuClose}
-              className="mt-2"
-            >
-              <MenuItem onClick={handleMenuClose}>Logout</MenuItem>
-            </Menu>
+              Logout
+            </Button>
           </div>
         </div>
       </Toolbar>
     </AppBar>
   );
+};
+
+Topbar.propTypes = {
+  selectedTab: PropTypes.string,
+  onTabChange: PropTypes.func.isRequired,
 };
 
 export default Topbar;

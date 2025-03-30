@@ -1,11 +1,21 @@
-import React from 'react';
-import Layout from './user/Layout/Layout';
-function App() {
-  return (
-    <>
-     <Layout/>
-    </>
-  )
-}
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Layout from "./user/Layout/Layout";
+import userRoutes from "./routes/userRoute";
 
-export default App
+const App = () => {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          {userRoutes.map((route, index) => (
+            <Route key={index} path={route.path} element={route.element} />
+          ))}
+         
+        </Route>
+      </Routes>
+    </Router>
+  );
+};
+
+export default App;

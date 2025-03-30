@@ -1,25 +1,39 @@
-import React from 'react';
-import Topbar from './layoutcomponent/Topbar';
-import Sidebar from './layoutcomponent/Sidebar';
+import React, { useState } from "react";
+import { Outlet } from "react-router-dom";
+import Topbar from "./layoutcomponent/Topbar";
+import Sidebar from "./layoutcomponent/Sidebar";
 
 const Layout = () => {
+  const [selectedTab, setSelectedTab] = useState("/home");
+  const [selectedSidebarIndex, setSelectedSidebarIndex] = useState(null);
+
+  const handleTabChange = (newTab) => {
+    setSelectedTab(newTab);
+    setSelectedSidebarIndex(null);
+  };
+
+  const handleSidebarClick = (index) => {
+    setSelectedSidebarIndex(index);
+    setSelectedTab(null);
+  };
+
   return (
     <div className="h-screen flex flex-col">
-    
+      {/* Top Navigation Bar */}
       <div className="fixed top-0 left-0 right-0 z-10">
-        <Topbar />
+        <Topbar selectedTab={selectedTab} onTabChange={handleTabChange} />
       </div>
 
-    
-      <div className="flex flex-grow pt-18"> {/* Added pt-16 to avoid overlap with Topbar */}
+      {/* Main Layout */}
+      <div className="flex flex-grow pt-18">
         {/* Sidebar */}
-        <div >
-          <Sidebar />
+        <div>
+          <Sidebar selectedIndex={selectedSidebarIndex} onItemClick={handleSidebarClick} />
         </div>
 
-        {/* Main Content */}
+        {/* Main Content Area */}
         <div className="flex-grow p-4 bg-white">
-          <p>Hi</p>
+          <Outlet /> {/* Dynamic content from routes */}
         </div>
       </div>
     </div>
