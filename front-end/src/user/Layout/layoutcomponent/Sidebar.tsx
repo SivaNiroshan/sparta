@@ -25,11 +25,11 @@ const drawerElements: [string, React.ElementType, string][] = [
 ];
 
 interface SidebarProps {
-  selectedIndex: number;
-  onItemClick: (index: number) => void;
+  selectedPath: string;  // Use selectedPath instead of index
+  onItemClick: (path: string) => void;  // Pass path instead of index
 }
 
-const Sidebar: React.FC<SidebarProps> = ({ selectedIndex, onItemClick }) => {
+const Sidebar: React.FC<SidebarProps> = ({ selectedPath, onItemClick }) => {
   const navigate = useNavigate();
 
   return (
@@ -48,13 +48,13 @@ const Sidebar: React.FC<SidebarProps> = ({ selectedIndex, onItemClick }) => {
       }}
     >
       <List className="h-full border-r-2 shadow-md">
-        {drawerElements.map(([text, Icon, path], index) => {
-          const isSelected = selectedIndex === index;
+        {drawerElements.map(([text, Icon, path]) => {
+          const isSelected = selectedPath === path; // Compare path instead of index
           return (
-            <ListItem key={index} disablePadding className={`p-1 mb-7 ${isSelected ? "border-2 border-black bg-[#3943B7] bg-opacity-80 text-white" : "hover:bg-[#E5E7EB] text-[#495057]"}`}>
+            <ListItem key={path} disablePadding className={`p-1 mb-7 ${isSelected ? "border-2 border-black bg-[#3943B7] bg-opacity-80 text-white" : "hover:bg-[#E5E7EB] text-[#495057]"}`}>
               <ListItemButton
                 onClick={() => {
-                  onItemClick(index);
+                  onItemClick(path);  // Pass path instead of index
                   navigate(path);
                 }}
               >
@@ -72,7 +72,7 @@ const Sidebar: React.FC<SidebarProps> = ({ selectedIndex, onItemClick }) => {
 };
 
 Sidebar.propTypes = {
-  selectedIndex: PropTypes.number,
+  selectedPath: PropTypes.string.isRequired,  // Updated to string
   onItemClick: PropTypes.func.isRequired,
 };
 

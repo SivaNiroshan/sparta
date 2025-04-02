@@ -12,8 +12,8 @@ const Layout = () => {
     setSelectedSidebarIndex(null);
   };
 
-  const handleSidebarClick = (index) => {
-    setSelectedSidebarIndex(index);
+  const handleSidebarClick = (path) => {
+    setSelectedSidebarIndex(path);
     setSelectedTab(null);
   };
 
@@ -27,9 +27,9 @@ const Layout = () => {
       {/* Main Layout */}
       <div className="flex flex-grow pt-18">
         {/* Sidebar */}
-        <div>
+        
           <Sidebar selectedIndex={selectedSidebarIndex} onItemClick={handleSidebarClick} />
-        </div>
+    
 
         {/* Main Content Area */}
         <div className="flex-grow p-4 bg-white">

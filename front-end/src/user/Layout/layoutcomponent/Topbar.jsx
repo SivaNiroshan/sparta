@@ -50,7 +50,7 @@ const Topbar = ({ selectedTab, onTabChange }) => {
             }}
           >
             {Object.entries(tabRoutes).map(([key, path]) => (
-              <Tab key={key} value={path} label={key} />
+              <Tab key={key}  value={path} label={key} />
             ))}
           </Tabs>
 

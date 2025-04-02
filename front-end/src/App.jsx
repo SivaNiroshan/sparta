@@ -9,7 +9,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Layout />}>
           {userRoutes.map((route, index) => (
-            <Route key={index} path={route.path} element={route.element} />
+            <Route key={route.path} path={route.path} element={route.element} />
           ))}
          
         </Route>
