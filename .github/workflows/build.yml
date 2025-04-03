@@ -19,14 +19,8 @@ jobs:
         with:
           fetch-depth: 0  # Ensures full history for SonarQube analysis
 
-      - name: Debug working directory
-        run: pwd
-
-      - name: List project files
-        run: ls -R
-
       - name: Install dependencies
-        run: npm install
+        run: npm ci
         working-directory: front-end  # Adjust if needed
 
       - name: Run unit tests with coverage
@@ -34,7 +28,12 @@ jobs:
         working-directory: front-end  # Adjust if needed
 
       - name: Check if lcov.info exists
-        run: ls -R front-end/coverage  # Debugging step to ensure coverage file exists
+        run: |
+          if [ ! -f front-end/coverage/lcov.info ]; then
+            echo "lcov.info file not found!"
+            exit 1
+          fi
+        working-directory: front-end
 
       - name: SonarQube Scan
         uses: SonarSource/sonarqube-scan-action@v5
@@ -42,9 +41,8 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
           args: >
-            # -Dsonar.projectKey=your-project-key      # Replace with your actual project key
             -Dsonar.sources=front-end/src
-            -Dsonar.tests=front-end/coverage
-            -Dsonar.javascript.lcov.reportPaths=front-end/coverage/lcov.info  # Use LCOV instead of JaCoCo
+            -Dsonar.tests=front-end/src
+            -Dsonar.javascript.lcov.reportPaths=front-end/coverage/lcov.info  # Path to LCOV report
             -Dsonar.coverage.exclusions=front-end/src/**/*.test.tsx  # Exclude test files if needed
-            -Dsonar.coverage.jacoco.xmlReportPaths=  # Disable JaCoCo by setting it empty
+            -Dsonar.verbose=true  # Enable verbose logging to help debug
