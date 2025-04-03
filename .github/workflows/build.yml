@@ -13,10 +13,21 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
-      
+          fetch-depth: 0  # Ensures full history for SonarQube
+
+      - name: Debug working directory
+        run: pwd
+
+      - name: List project files
+        run: ls -R
+
+      - name: Install dependencies
+        run: npm install
+        working-directory: front-end  # Adjust this if needed
+
       - name: Run unit tests with coverage
-        run: npm run coverage  # Modify as needed for your test command 
+        run: npm run coverage
+        working-directory: front-end  # Adjust this if needed
 
       - name: SonarQube Scan
         uses: SonarSource/sonarqube-scan-action@v5
@@ -24,6 +35,6 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
           args: >
-            -Dsonar.sources= front-end/src  # Specify the source code directory
-            -Dsonar.tests=front-end/coverage  # Specify the test directory if applicable
-            -Dsonar.javascript.lcov.reportPath=coverage/lcov.info  # Path to the coverage report
+            -Dsonar.sources=front-end/src
+            -Dsonar.tests=front-end/coverage
+            -Dsonar.javascript.lcov.reportPath=front-end/coverage/lcov.info
