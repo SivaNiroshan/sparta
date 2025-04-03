@@ -1,13 +1,16 @@
-import { defineConfig } from 'vitest/config';
+import { defineConfig } from 'vitest/config'
 
 export default defineConfig({
-    test: {
-        globals: true,
-        environment: 'jsdom',
-        coverage: {
-            provider: 'istanbul',  // Ensure Istanbul is used
-            reporter: ['text', 'lcov'],  // Generate lcov.info
-            reportsDirectory: 'coverage',  // Ensure coverage files are in the expected directory
-        }
+  test: {
+    coverage: {
+      provider: 'istanbul', // Based on your output, you're using istanbul
+      reporter: ['text', 'lcov', 'json', 'html'],
+      reportsDirectory: './coverage'
     },
-});
+    // Add JUnit reporter for SonarQube
+    reporters: ['default', 'junit'],
+    outputFile: {
+      junit: './junit-report.xml'
+    }
+  }
+})
