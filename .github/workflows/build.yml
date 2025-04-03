@@ -1,4 +1,5 @@
 name: Build
+
 on:
   push:
     branches:
@@ -6,14 +7,17 @@ on:
       - develop
   pull_request:
     types: [opened, synchronize, reopened]
+
 jobs:
   sonarqube:
     name: SonarQube build and test
     runs-on: windows-latest
+
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # Ensures full history for SonarQube
+          fetch-depth: 0  # Ensures full history for SonarQube analysis
 
       - name: Debug working directory
         run: pwd
@@ -23,11 +27,14 @@ jobs:
 
       - name: Install dependencies
         run: npm install
-        working-directory: front-end  # Adjust this if needed
+        working-directory: front-end  # Adjust if needed
 
       - name: Run unit tests with coverage
         run: npm run coverage
-        working-directory: front-end  # Adjust this if needed
+        working-directory: front-end  # Adjust if needed
+
+      - name: Check if lcov.info exists
+        run: ls -R front-end/coverage  # Debugging step to ensure coverage file exists
 
       - name: SonarQube Scan
         uses: SonarSource/sonarqube-scan-action@v5
@@ -35,6 +42,9 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
           args: >
+            # -Dsonar.projectKey=your-project-key      # Replace with your actual project key
             -Dsonar.sources=front-end/src
             -Dsonar.tests=front-end/coverage
-            -Dsonar.javascript.lcov.reportPath=front-end/coverage/lcov.info
+            -Dsonar.javascript.lcov.reportPath=front-end/coverage/lcov.info  # Use LCOV instead of JaCoCo
+            -Dsonar.coverage.exclusions=front-end/src/**/*.test.tsx  # Exclude test files if needed
+            -Dsonar.coverage.jacoco.xmlReportPaths=  # Disable JaCoCo by setting it empty
