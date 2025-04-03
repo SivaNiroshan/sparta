@@ -45,6 +45,6 @@ jobs:
             # -Dsonar.projectKey=your-project-key      # Replace with your actual project key
             -Dsonar.sources=front-end/src
             -Dsonar.tests=front-end/coverage
-            -Dsonar.javascript.lcov.reportPath=front-end/coverage/lcov.info  # Use LCOV instead of JaCoCo
+            -Dsonar.javascript.lcov.reportPaths=front-end/coverage/lcov.info  # Use LCOV instead of JaCoCo
             -Dsonar.coverage.exclusions=front-end/src/**/*.test.tsx  # Exclude test files if needed
             -Dsonar.coverage.jacoco.xmlReportPaths=  # Disable JaCoCo by setting it empty
