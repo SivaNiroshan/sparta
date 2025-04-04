@@ -1,11 +1,12 @@
-import { defineConfig } from 'vitest/config'
+import { defineConfig } from 'vitest/config';
 
 export default defineConfig({
-    test: {
-      coverage: {
-        provider: 'v8', // or 'istanbul'
-        reporter: ['text', 'json', 'html', 'lcov', 'xml'],
-        reportsDirectory: './coverage'
-      }
-    }
-  })
+  test: {
+    environment: 'jsdom',
+    coverage: {
+      provider: 'istanbul', // ensure you're using Istanbul
+      reporter: ['text', 'html', 'json', 'lcov'], // check the reporters you want
+      reportsDirectory: './coverage',
+    },
+  },
+});
