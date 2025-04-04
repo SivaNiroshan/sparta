@@ -42,5 +42,5 @@ jobs:
             -Dsonar.projectKey=SivaNiroshan_sparta
             -Dsonar.organization=sivaniroshan
             -Dsonar.sources=src
-            -Dsonar.tests=tests
+            -Dsonar.tests=test
             -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
