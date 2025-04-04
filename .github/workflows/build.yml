@@ -20,11 +20,15 @@ jobs:
         with:
           node-version: '18'
           
-      - name: Install dependencies
-        run: npm install
+      - name: Navigate to front-end directory and install dependencies
+        run: |
+          cd front-end
+          npm install
         
       - name: Run unit tests with coverage
-        run: npm run test:coverage  # Make sure this command is defined in your package.json
+        run: |
+          cd front-end
+          npm run test:coverage
         
       - name: SonarQube Scan
         uses: SonarSource/sonarqube-scan-action@v5
