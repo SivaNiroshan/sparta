@@ -1,7 +1,7 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import { describe, it, expect } from "vitest";
-import Liked from "../../../user/Liked/Liked";
+import Liked from "../../../src/user/Liked/Liked";
 
 describe("Liked Component", () => {
   it("renders the Liked component correctly", () => {

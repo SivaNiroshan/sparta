@@ -2,7 +2,7 @@ import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import { describe, it, expect, vi } from "vitest";
-import Sidebar from "../../../../user/Layout/layoutcomponent/Sidebar";
+import Sidebar from "../../../../src/user/Layout/layoutcomponent/Sidebar";
 
 const mockOnItemClick = vi.fn();
 

@@ -2,11 +2,11 @@ import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import { MemoryRouter, Routes, Route } from "react-router-dom";
 import { describe, it, expect, vi } from "vitest";
-import Layout from "../../../user/Layout/Layout";
+import Layout from "../../../src/user/Layout/Layout";
 import { Button } from "@mui/material";
 
 // Mock the Topbar and Sidebar components
-vi.mock("../../../user/Layout/layoutcomponent/Topbar", () => ({
+vi.mock("../../../src/user/Layout/layoutcomponent/Topbar", () => ({
   default: ({ selectedTab, onTabChange }) => (
     <div data-testid="topbar">
       Topbar - Selected Tab: {selectedTab}
@@ -15,7 +15,7 @@ vi.mock("../../../user/Layout/layoutcomponent/Topbar", () => ({
   ),
 }));
 
-vi.mock("../../../user/Layout/layoutcomponent/Sidebar", () => ({
+vi.mock("../../../src/user/Layout/layoutcomponent/Sidebar", () => ({
   default: ({ selectedIndex, onItemClick }) => (
     <div data-testid="sidebar">
       Sidebar - Selected Index: {selectedIndex}

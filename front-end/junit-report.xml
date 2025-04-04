@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites name="vitest tests" tests="0" failures="0" errors="0" time="0">
+    <testsuite name="src/test/routes/userRoute.test.jsx" timestamp="2025-04-04T17:11:10.550Z" hostname="THABENDRA-PC" tests="0" failures="0" errors="0" skipped="0" time="0">
+    </testsuite>
+    <testsuite name="src/test/user/AboutUs/AboutUs.test.jsx" timestamp="2025-04-04T17:11:10.551Z" hostname="THABENDRA-PC" tests="0" failures="0" errors="0" skipped="0" time="0">
+    </testsuite>
+    <testsuite name="src/test/user/Feedback/Feedback.test.jsx" timestamp="2025-04-04T17:11:10.552Z" hostname="THABENDRA-PC" tests="0" failures="0" errors="0" skipped="0" time="0">
+    </testsuite>
+    <testsuite name="src/test/user/Friend/Friend.test.jsx" timestamp="2025-04-04T17:11:10.553Z" hostname="THABENDRA-PC" tests="0" failures="0" errors="0" skipped="0" time="0">
+    </testsuite>
+    <testsuite name="src/test/user/Home/Home.test.jsx" timestamp="2025-04-04T17:11:10.583Z" hostname="THABENDRA-PC" tests="0" failures="0" errors="0" skipped="0" time="0">
+    </testsuite>
+    <testsuite name="src/test/user/Layout/Layout.test.jsx" timestamp="2025-04-04T17:11:10.585Z" hostname="THABENDRA-PC" tests="0" failures="0" errors="0" skipped="0" time="0">
+    </testsuite>
+    <testsuite name="src/test/user/Inbox/Inbox.test.jsx" timestamp="2025-04-04T17:11:10.588Z" hostname="THABENDRA-PC" tests="0" failures="0" errors="0" skipped="0" time="0">
+    </testsuite>
+    <testsuite name="src/test/user/History/History.test.jsx" timestamp="2025-04-04T17:11:10.590Z" hostname="THABENDRA-PC" tests="0" failures="0" errors="0" skipped="0" time="0">
+    </testsuite>
+    <testsuite name="src/test/user/Liked/Liked.test.jsx" timestamp="2025-04-04T17:11:10.600Z" hostname="THABENDRA-PC" tests="0" failures="0" errors="0" skipped="0" time="0">
+    </testsuite>
+    <testsuite name="src/test/user/Notification/Notification.test.jsx" timestamp="2025-04-04T17:11:10.614Z" hostname="THABENDRA-PC" tests="0" failures="0" errors="0" skipped="0" time="0">
+    </testsuite>
+    <testsuite name="src/test/user/Profile/Profile.test.jsx" timestamp="2025-04-04T17:11:10.633Z" hostname="THABENDRA-PC" tests="0" failures="0" errors="0" skipped="0" time="0">
+    </testsuite>
+    <testsuite name="src/test/user/Settings/Settings.test.jsx" timestamp="2025-04-04T17:11:10.636Z" hostname="THABENDRA-PC" tests="0" failures="0" errors="0" skipped="0" time="0">
+    </testsuite>
+    <testsuite name="src/test/user/Shared/Shared.test.jsx" timestamp="2025-04-04T17:11:10.651Z" hostname="THABENDRA-PC" tests="0" failures="0" errors="0" skipped="0" time="0">
+    </testsuite>
+    <testsuite name="src/test/user/Layout/layoutcomponent/Sidebar.test.jsx" timestamp="2025-04-04T17:11:10.654Z" hostname="THABENDRA-PC" tests="0" failures="0" errors="0" skipped="0" time="0">
+    </testsuite>
+    <testsuite name="src/test/user/Layout/layoutcomponent/Topbar.test.jsx" timestamp="2025-04-04T17:11:10.659Z" hostname="THABENDRA-PC" tests="0" failures="0" errors="0" skipped="0" time="0">
+    </testsuite>
+</testsuites>

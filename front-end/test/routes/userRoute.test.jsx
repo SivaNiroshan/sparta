@@ -2,40 +2,40 @@ import React from "react";
 import { render, screen } from "@testing-library/react";
 import { MemoryRouter, Routes, Route } from "react-router-dom";
 import { describe, it, expect, vi } from "vitest";
-import userRoutes from "../../routes/userRoute";
+import userRoutes from "../../src/routes/userRoute";
 
 // Mock all components used in userRoutes
-vi.mock("../../user/Home/Home", () => ({
+vi.mock("../../src/user/Home/Home", () => ({
   default: () => <div>Home</div>,
 }));
-vi.mock("../../user/Notification/Notification", () => ({
+vi.mock("../../src/user/Notification/Notification", () => ({
   default: () => <div>Notification</div>,
 }));
-vi.mock("../../user/Profile/Profile", () => ({
+vi.mock("../../src/user/Profile/Profile", () => ({
   default: () => <div>Profile</div>,
 }));
-vi.mock("../../user/Friend/Friend", () => ({
+vi.mock("../../src/user/Friend/Friend", () => ({
   default: () => <div>Friend</div>,
 }));
-vi.mock("../../user/Inbox/Inbox", () => ({
+vi.mock("../../src/user/Inbox/Inbox", () => ({
   default: () => <div>Inbox</div>,
 }));
-vi.mock("../../user/Settings/Settings", () => ({
+vi.mock("../../src/user/Settings/Settings", () => ({
   default: () => <div>Settings</div>,
 }));
-vi.mock("../../user/History/History", () => ({
+vi.mock("../../src/user/History/History", () => ({
   default: () => <div>History</div>,
 }));
-vi.mock("../../user/Shared/Shared", () => ({
+vi.mock("../../src/user/Shared/Shared", () => ({
   default: () => <div>Shared</div>,
 }));
-vi.mock("../../user/Feedback/Feedback", () => ({
+vi.mock("../../src/user/Feedback/Feedback", () => ({
   default: () => <div>Feedback</div>,
 }));
-vi.mock("../../user/AboutUs/AboutUS", () => ({
+vi.mock("../../src/user/AboutUs/AboutUS", () => ({
   default: () => <div>AboutUS</div>,
 }));
-vi.mock("../../user/Liked/Liked", () => ({
+vi.mock("../../src/user/Liked/Liked", () => ({
   default: () => <div>Liked</div>,
 }));
 

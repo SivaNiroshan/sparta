@@ -1,7 +1,7 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import { describe, it, expect } from "vitest";
-import Inbox from "../../../user/Inbox/Inbox";
+import Inbox from "../../../src/user/Inbox/Inbox";
 
 describe("Inbox Component", () => {
   it("renders the Inbox component correctly", () => {

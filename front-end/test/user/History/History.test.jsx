@@ -1,7 +1,7 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import { describe, it, expect } from "vitest";
-import History from "../../../user/History/History";
+import History from "../../../src/user/History/History";
 
 describe("History Component", () => {
   it("renders the History component correctly", () => {

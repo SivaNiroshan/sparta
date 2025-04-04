@@ -1,7 +1,7 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import { describe, it, expect } from "vitest";
-import Settings from "../../../user/Settings/Settings";
+import Settings from "../../../src/user/Settings/Settings";
 
 describe("Settings Component", () => {
   it("renders the Settings component correctly", () => {
