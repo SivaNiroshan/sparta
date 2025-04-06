@@ -4,12 +4,10 @@ on:
     branches:
       - main
       - develop
-      - develop
   pull_request:
     types: [opened, synchronize, reopened]
 jobs:
   sonarqube:
-    name: SonarQube build and test
     name: SonarQube build and test
     runs-on: windows-latest
     steps:
@@ -32,14 +30,6 @@ jobs:
         uses: SonarSource/sonarqube-scan-action@v5
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        with:
-          projectBaseDir: front-end
-          args: >
-            -Dsonar.projectKey=SivaNiroshan_sparta
-            -Dsonar.organization=sivaniroshan
-            -Dsonar.sources=src
-            -Dsonar.tests=test
-            -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
         with:
           projectBaseDir: front-end
           args: >
