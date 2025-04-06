@@ -4,13 +4,15 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import SPARTA_IMG from "../../assets/sparta_img.png";
 import { useNavigate } from 'react-router-dom';
-import ResetPassword from './ResetPassword';
+import ForgotPassword from './ForgotPassword';
+import CreatePassword from './CreatePassword';
 
 
 const SignIn = () => {
   const navigate = useNavigate();
 
-  const [open, setOpen] = useState(false);
+  const [openForgotPassword, setOpenForgotPassword] = useState(false);
+  const [openCreatePassword, setOpenCreatePassword] = useState(false);
 
   const validationSchema = Yup.object({
     email: Yup.string()
@@ -21,7 +23,7 @@ const SignIn = () => {
       .matches(/[a-z]/, "Password must contain at least one lowercase letter")
       .matches(/[A-Z]/, "Password must contain at least one uppercase letter")
       .matches(/\d/, "Password must contain at least one number")
-      .matches(/[@$!%*?&#/]/, "Password must contain at least one special character")
+      .matches(/[@$!%*?&#/^()]/, "Password must contain at least one special character")
       .required("Password is required")
   });
 
@@ -32,7 +34,8 @@ const SignIn = () => {
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      console.log('Form values:', values);
+      //TO DO
+      //handle backend calls
       navigate('/home');
     },
   });
@@ -44,21 +47,30 @@ const SignIn = () => {
       bgcolor: 'white',
       padding: 1
     }}>
-      <Box sx={{ 
-        position: 'absolute', 
-        top: '10px', 
-        left: '10px', 
-        zIndex: 2 
-      }}>
-        <img 
-          src={SPARTA_IMG} 
-          alt="Sparta Logo" 
-          style={{ 
-            height: '70px',
-            width: '70px'
-          }} 
-          // onClick={() => navigate("/")} need to check
-        />
+      <Box 
+        sx={{ 
+          position: 'absolute', 
+          top: '10px', 
+          left: '10px', 
+          zIndex: 2 
+        }}
+      >
+        <Button
+          onClick={() => navigate("/")}
+          sx={{ 
+            minWidth: 0, 
+            padding: 0, 
+            borderRadius: 0, 
+            backgroundColor: 'transparent', 
+            '&:hover': { backgroundColor: 'transparent' } 
+          }}
+        >
+          <img 
+            src={SPARTA_IMG} 
+            alt="Sparta Logo" 
+            style={{ height: '70px', width: '70px' }} 
+          />
+        </Button>
       </Box>
 
       <Box sx={{ 
@@ -96,7 +108,6 @@ const SignIn = () => {
                 textAlign: 'center',
                 fontWeight: 'bold',
                 marginBottom: 2,
-                // fontFamily: 'var(--font-display)'
               }}
             >
               Log In
@@ -224,7 +235,7 @@ const SignIn = () => {
                     color: '#3C8EF8',
                   }
                 }}
-                onClick={()=>{setOpen(true)}}
+                onClick={()=>{setOpenForgotPassword(true)}}
               >
                 Forgot Password?
               </Typography>
@@ -241,6 +252,7 @@ const SignIn = () => {
               sx={{ 
                 cursor: 'pointer', 
                 color: "#686666",
+                textAlign: 'center',
               }}
               onClick={() => navigate('/sign-up')}
             >
@@ -256,13 +268,24 @@ const SignIn = () => {
             </Typography>
           </Box>
         </Box>
+        {openForgotPassword && (
+        <Dialog open={open} onClose={()=>{setOpenForgotPassword(false)}}>
+          <DialogTitle sx={{textAlign:'center'}}>Forgot Password</DialogTitle>
+          <DialogContent sx={{justifyContent:"center", alignItems:"center"}}>
+            <ForgotPassword 
+              setOpenForgotPassword = {setOpenForgotPassword}
+              setOpenCreatePassword = {setOpenCreatePassword}
+            />
+          </DialogContent>
+        </Dialog> )}
+        {openCreatePassword && (
+        <Dialog open={open} onClose={()=>{setOpenCreatePassword(false)}}>
+          <DialogTitle sx={{textAlign:'center'}}>Create New Password</DialogTitle>
+          <DialogContent sx={{justifyContent:"center", alignItems:"center"}}>
+            <CreatePassword setOpenCreatePassword = {setOpenCreatePassword}/>
+          </DialogContent>
+        </Dialog> )}
       </Box>
-      <Dialog open={open} onClose={()=>{setOpen(false)}}>
-        <DialogTitle sx={{textAlign:'center'}}>Forgot Password</DialogTitle>
-        <DialogContent sx={{justifyContent:"center", alignItems:"center"}}>
-            <ResetPassword setOpenResetPassword = {setOpen}/>
-        </DialogContent>
-      </Dialog>
     </Box>
   );
 };

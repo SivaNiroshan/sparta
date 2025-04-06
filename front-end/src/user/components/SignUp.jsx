@@ -1,5 +1,15 @@
 import React from 'react';
-import { Box, Button, FormControl, MenuItem, Select, TextField, Typography } from '@mui/material';
+import { 
+  Box, 
+  Button, 
+  FormControl, 
+  MenuItem, 
+  Select, 
+  TextField, 
+  Typography, 
+  Checkbox, 
+  ListItemText, 
+  FormHelperText } from '@mui/material';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import SPARTA_IMG from "../../assets/sparta_img.png";
@@ -7,12 +17,14 @@ import { useNavigate } from 'react-router-dom';
 
 const SignUp = () => {
   const navigate = useNavigate();
+
   const validationSchema = Yup.object({
     firstName: Yup.string()
       .required('First name is required'),
     lastName: Yup.string()
       .required('Last name is required'),
-    favouriteGenre: Yup.string()
+      favouriteGenre: Yup.array()
+      .min(1, 'Please select at least one genre')
       .required('Please select your favourite genre'),
     email: Yup.string()
       .email('Invalid email format')
@@ -22,7 +34,7 @@ const SignUp = () => {
       .matches(/[a-z]/, "Password must contain at least one lowercase letter")
       .matches(/[A-Z]/, "Password must contain at least one uppercase letter")
       .matches(/\d/, "Password must contain at least one number")
-      .matches(/[@$!%*?&#/]/, "Password must contain at least one special character")
+      .matches(/[@$!%*?&#/^()]/, "Password must contain at least one special character")
       .required("Password is required"),
     confirmPassword: Yup.string()
       .oneOf([Yup.ref('password'), null], 'Passwords must match')
@@ -33,14 +45,15 @@ const SignUp = () => {
     initialValues: {
       firstName: '',
       lastName: '',
-      favouriteGenre: '',
+      favouriteGenre: [],
       email: '',
       password: '',
       confirmPassword: '',
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      console.log('Form values:', values);
+      // TO DO
+      // need to handle backend calls
       navigate('/home');
     },
   });
@@ -58,15 +71,22 @@ const SignUp = () => {
         left: '10px', 
         zIndex: 2 
       }}>
-        <img 
-          src={SPARTA_IMG} 
-          alt="Sparta Logo" 
-          style={{ 
-            height: '70px',
-            width: '70px'
-          }} 
-          // onClick={() => navigate("/")} need to check
-        />
+        <Button
+          onClick={() => navigate("/")}
+          sx={{ 
+            minWidth: 0, 
+            padding: 0, 
+            borderRadius: 0, 
+            backgroundColor: 'transparent', 
+            '&:hover': { backgroundColor: 'transparent' } 
+          }}
+        >
+          <img 
+            src={SPARTA_IMG} 
+            alt="Sparta Logo" 
+            style={{ height: '70px', width: '70px' }} 
+          />
+        </Button>
       </Box>
 
       <Box sx={{ 
@@ -104,7 +124,6 @@ const SignUp = () => {
                 textAlign: 'center',
                 fontWeight: 'bold',
                 marginBottom: 2,
-                // fontFamily: 'var(--font-display)'
               }}
             >
               Create Account
@@ -233,17 +252,27 @@ const SignUp = () => {
                 <Select
                   id="favouriteGenre"
                   name="favouriteGenre"
+                  multiple 
                   value={formik.values.favouriteGenre}
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                   displayEmpty
-                  renderValue={selected => selected ? selected : <span style={{ color: '#9e9e9e' }}>Select genre</span>}
+                  renderValue={(selected) => selected.length > 0 
+                    ? selected.join(',') 
+                    : <span style={{ color: '#9e9e9e' }}>
+                        Select genre
+                      </span>}
                 >
-                  <MenuItem value="action">Action</MenuItem>
-                  <MenuItem value="comedy">Comedy</MenuItem>
-                  <MenuItem value="drama">Drama</MenuItem>
-                  <MenuItem value="romance">Romance</MenuItem>
+                  {['action', 'comedy', 'drama', 'romance'].map((genre) => (
+                    <MenuItem key={genre} value={genre}>
+                      <Checkbox checked={formik.values.favouriteGenre.indexOf(genre) > -1} />
+                      <ListItemText primary={genre.charAt(0).toUpperCase() + genre.slice(1)} />
+                    </MenuItem>
+                  ))}
                 </Select>
+                  <FormHelperText>
+                    {formik.touched.favouriteGenre && formik.errors.favouriteGenre}
+                  </FormHelperText>
               </FormControl>
             </Box>
 

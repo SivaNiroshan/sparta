@@ -21,6 +21,7 @@
     "formik": "^2.4.6",
     "front-end": "file:",
     "iconsax-react": "^0.0.8",
+    "prop-types": "^15.8.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-router-dom": "^7.4.1",

@@ -1,4 +1,4 @@
-name: Sparta sonarCloud scan
+name: Sparta SonarCloud Scan
 on:
   push:
     branches:
@@ -15,16 +15,10 @@ jobs:
         with:
           fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
           
-      # - name: Setup Node.js
-      #   uses: actions/setup-node@v4
-      #   with:
-      #     node-version: '18'
-          
       - name: Navigate to front-end directory and install dependencies
         run: |
           cd front-end
           npm install
-      # npm install --save-dev @vitest/coverage-v8 @testing-library/react @testing-library/jest-dom
         
       - name: Run unit tests with coverage
         run: |

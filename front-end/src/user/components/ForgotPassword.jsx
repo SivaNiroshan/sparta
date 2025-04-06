@@ -1,13 +1,17 @@
 import { Box, Button, TextField, Typography } from "@mui/material";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import * as Yup from "yup";
 import { useFormik } from "formik";
+import PropTypes from 'prop-types';
 
-const ResetPassword = ({ setOpenResetPassword }) => {
-  const [otpSent, setOtpSent] = useState(false); 
+const ForgotPassword = ({ setOpenForgotPassword, setOpenCreatePassword }) => {
+  const [otpSent, setOtpSent] = useState(false);
+  const [resendDisabled, setResendDisabled] = useState(false);
+  const [countdown, setCountdown] = useState(30);
 
   const emailValidationSchema = Yup.object({
-    email: Yup.string().email("Invalid email format").required("Email is required"),
+    email: Yup.string().email("Invalid email format")
+        .required("Email is required"),
   });
 
   const otpValidationSchema = Yup.object({
@@ -19,26 +23,48 @@ const ResetPassword = ({ setOpenResetPassword }) => {
     validationSchema: otpSent ? otpValidationSchema : emailValidationSchema,
     onSubmit: (values) => {
       if (!otpSent) {
-        console.log("Sending OTP to:", values.email);
-        // TO DO 
-        // have to check the email provided is exist in the system if not throw errormessage else send otp to email
+        sendOTP(values.email);
         setOtpSent(true);
       } else {
-        console.log("Verifying OTP:", values.otp);
-        //TO DO
-        // HAVE TO CHECK THE PROVIDED OTP IS CORRECT WITH THE EMAIL AND NAVIGATE TO PASSWORD CREATION PAGE OR POPUP
-
+        verifyOTP(values.email, values.otp);
       }
     },
   });
 
-  const handleResendOTP = ()=>{
-    setOtpSent(true);
-  }
+  const sendOTP = (email) => {
+    // TO DO: backend call to send OTP
+    
+    //if email exist in system and otp sent succesfully
+    setResendDisabled(true);
+    setCountdown(30);
+  };
 
-  const handleSubmitOrSend =()=>{
+  const verifyOTP = (email, otp) => {
+    // TO DO: backend  call to verify OTP
+    
+    // if otp verification passed then
+    setOpenForgotPassword(false);
+    setOpenCreatePassword(true);
+  };
 
-  }
+  const handleResendOTP = () => {
+    sendOTP(formik.values.email);
+  };
+
+  useEffect(() => {
+    let timer;
+    if (resendDisabled && countdown > 0) {
+      timer = setTimeout(() => {
+        setCountdown(countdown - 1);
+      }, 1000);
+    } else if (countdown === 0) {
+      setResendDisabled(false);
+    }
+    
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [resendDisabled, countdown]);
 
   return (
     <Box
@@ -85,8 +111,6 @@ const ResetPassword = ({ setOpenResetPassword }) => {
           }}
         />
 
-        {/* after otp sent succefully */}
-
         {otpSent && (
           <>
             <Typography 
@@ -123,7 +147,6 @@ const ResetPassword = ({ setOpenResetPassword }) => {
           </>
         )}
 
-        
         <Button
           type="submit"
           fullWidth
@@ -135,7 +158,6 @@ const ResetPassword = ({ setOpenResetPassword }) => {
             borderRadius: 2,
             "&:hover": { backgroundColor: "#1A6FE9" },
           }}
-          onClick={()=>{handleSubmitOrSend()}}
         >
           {otpSent ? "Submit OTP" : "Send OTP"}
         </Button>
@@ -143,16 +165,17 @@ const ResetPassword = ({ setOpenResetPassword }) => {
         {otpSent && (
           <Button
             fullWidth
+            disabled={resendDisabled}
+            onClick={handleResendOTP}
             sx={{
               mt: 1,
               backgroundColor: "transparent",
-              color: "#3C8EF8",
+              color: resendDisabled ? "gray" : "#3C8EF8",
               textTransform: "none",
-              "&:hover": { textDecoration: "underline" },
+              "&:hover": { textDecoration: resendDisabled ? "none" : "underline" },
             }}
-            onClick={() => {handleResendOTP()}}
           >
-            Resend OTP
+            {resendDisabled ? `Resend OTP in ${countdown}s` : "Resend OTP"}
           </Button>
         )}
       </form>
@@ -160,4 +183,8 @@ const ResetPassword = ({ setOpenResetPassword }) => {
   );
 };
 
-export default ResetPassword;
+ForgotPassword.propTypes = {
+  setOpenForgotPassword = PropTypes.func.isRequired,
+  setOpenCreatePassword = PropTypes.func.isRequired,
+}
+export default ForgotPassword;
