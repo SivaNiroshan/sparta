@@ -149,8 +149,8 @@ const CreatePassword = ({setOpenCreatePassword}) => {
   )
 };
 
-CreatePassword.PropTypes = {
-    setOpenCreatePassword = PropTypes.func.isRequired
+CreatePassword.propTypes = {
+    setOpenCreatePassword : PropTypes.func.isRequired
 }
 
 export default CreatePassword

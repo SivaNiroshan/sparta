@@ -15,7 +15,7 @@ import * as Yup from 'yup';
 import SPARTA_IMG from "../../assets/sparta_img.png";
 import { useNavigate } from 'react-router-dom';
 
-const SignUp = () => {
+const SignUp = ({setStatus}) => {
   const navigate = useNavigate();
 
   const validationSchema = Yup.object({
@@ -54,6 +54,7 @@ const SignUp = () => {
     onSubmit: (values) => {
       // TO DO
       // need to handle backend calls
+      setStatus(true)
       navigate('/home');
     },
   });
@@ -458,4 +459,7 @@ const SignUp = () => {
   );
 };
 
+SignUp.propTypes = {
+  setStatus: PropTypes.func.isRequired,
+}
 export default SignUp;

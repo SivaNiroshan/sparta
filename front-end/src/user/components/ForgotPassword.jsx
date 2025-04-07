@@ -184,7 +184,7 @@ const ForgotPassword = ({ setOpenForgotPassword, setOpenCreatePassword }) => {
 };
 
 ForgotPassword.propTypes = {
-  setOpenForgotPassword = PropTypes.func.isRequired,
-  setOpenCreatePassword = PropTypes.func.isRequired,
+  setOpenForgotPassword : PropTypes.func.isRequired,
+  setOpenCreatePassword : PropTypes.func.isRequired,
 }
 export default ForgotPassword;

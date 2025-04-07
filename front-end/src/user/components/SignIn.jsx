@@ -6,9 +6,10 @@ import SPARTA_IMG from "../../assets/sparta_img.png";
 import { useNavigate } from 'react-router-dom';
 import ForgotPassword from './ForgotPassword';
 import CreatePassword from './CreatePassword';
+import PropTypes from 'prop-types';
 
 
-const SignIn = () => {
+const SignIn = ({setStatus}) => {
   const navigate = useNavigate();
 
   const [openForgotPassword, setOpenForgotPassword] = useState(false);
@@ -36,6 +37,7 @@ const SignIn = () => {
     onSubmit: (values) => {
       //TO DO
       //handle backend calls
+      setStatus(true)
       navigate('/home');
     },
   });
@@ -288,6 +290,10 @@ const SignIn = () => {
       </Box>
     </Box>
   );
+};
+
+SignIn.propTypes = {
+  setStatus: PropTypes.func.isRequired,
 };
 
 export default SignIn;
