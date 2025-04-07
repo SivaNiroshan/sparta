@@ -23,7 +23,7 @@ jobs:
       - name: Run unit tests with coverage
         run: |
           cd front-end
-          npm run test:coverage || echo "Tests failed"
+          npm run coverage || echo "Tests failed"
         continue-on-error: false
         
       - name: SonarQube Scan
