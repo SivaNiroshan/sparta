@@ -12,9 +12,9 @@ import {
   FormHelperText } from '@mui/material';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import SPARTA_IMG from "../../assets/sparta_img.png";
 import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import Logo from './Logo';
 
 const SignUp = ({setStatus}) => {
   const navigate = useNavigate();
@@ -67,29 +67,7 @@ const SignUp = ({setStatus}) => {
       bgcolor: 'white',
       padding: 1
     }}>
-      <Box sx={{ 
-        position: 'absolute', 
-        top: '10px', 
-        left: '10px', 
-        zIndex: 2 
-      }}>
-        <Button
-          onClick={() => navigate("/")}
-          sx={{ 
-            minWidth: 0, 
-            padding: 0, 
-            borderRadius: 0, 
-            backgroundColor: 'transparent', 
-            '&:hover': { backgroundColor: 'transparent' } 
-          }}
-        >
-          <img 
-            src={SPARTA_IMG} 
-            alt="Sparta Logo" 
-            style={{ height: '70px', width: '70px' }} 
-          />
-        </Button>
-      </Box>
+      <Logo />
 
       <Box sx={{ 
         display: 'flex',
