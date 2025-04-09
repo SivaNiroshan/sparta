@@ -14,6 +14,7 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import SPARTA_IMG from "../../assets/sparta_img.png";
 import { useNavigate } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 const SignUp = ({setStatus}) => {
   const navigate = useNavigate();
