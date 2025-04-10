@@ -24,7 +24,7 @@ const SignUp = ({setStatus}) => {
       .required('First name is required'),
     lastName: Yup.string()
       .required('Last name is required'),
-      favouriteGenre: Yup.array()
+      favouriteGenere: Yup.array()
       .min(1, 'Please select at least one genre')
       .required('Please select your favourite genre'),
     email: Yup.string()
@@ -46,7 +46,7 @@ const SignUp = ({setStatus}) => {
     initialValues: {
       firstName: '',
       lastName: '',
-      favouriteGenre: [],
+      favouriteGenere: [],
       email: '',
       password: '',
       confirmPassword: '',
@@ -200,19 +200,19 @@ const SignUp = ({setStatus}) => {
               <Typography 
                 variant="subtitle3" 
                 component="label" 
-                htmlFor="favouriteGenre"
+                htmlFor="favouriteGenere"
                 sx={{ 
                   display: 'block', 
                   mb: 0.5,
                   fontFamily: 'var(--font-display)'
                 }}
               >
-                Favourite Genre
+                Favourite Genere
               </Typography>
               <FormControl 
                 fullWidth
                 size="small"
-                error={formik.touched.favouriteGenre && Boolean(formik.errors.favouriteGenre)}
+                error={formik.touched.favouriteGenere && Boolean(formik.errors.favouriteGenere)}
                 sx={{
                   '& .MuiOutlinedInput-root': {
                     backgroundColor: 'white ', 
@@ -230,28 +230,29 @@ const SignUp = ({setStatus}) => {
                 }}
               >
                 <Select
-                  id="favouriteGenre"
-                  name="favouriteGenre"
+                  id="favouriteGenere"
+                  name="favouriteGenere"
                   multiple 
-                  value={formik.values.favouriteGenre}
+                  value={formik.values.favouriteGenere}
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                   displayEmpty
                   renderValue={(selected) => selected.length > 0 
                     ? selected.join(',') 
                     : <span style={{ color: '#9e9e9e' }}>
-                        Select genre
+                        Select genere
                       </span>}
+                      
                 >
-                  {['action', 'comedy', 'drama', 'romance'].map((genre) => (
-                    <MenuItem key={genre} value={genre}>
-                      <Checkbox checked={formik.values.favouriteGenre.indexOf(genre) > -1} />
-                      <ListItemText primary={genre.charAt(0).toUpperCase() + genre.slice(1)} />
+                  {['action', 'comedy', 'drama', 'romance'].map((genere) => (
+                    <MenuItem key={genere} value={genere}>
+                      <Checkbox checked={formik.values.favouriteGenere.indexOf(genere) > -1} />
+                      <ListItemText primary={genere.charAt(0).toUpperCase() + genere.slice(1)} />
                     </MenuItem>
                   ))}
                 </Select>
                   <FormHelperText>
-                    {formik.touched.favouriteGenre && formik.errors.favouriteGenre}
+                    {formik.touched.favouriteGenere && formik.errors.favouriteGenere}
                   </FormHelperText>
               </FormControl>
             </Box>
@@ -414,18 +415,20 @@ const SignUp = ({setStatus}) => {
                 Register
               </Button>
               <Typography
-                sx={{ 
-                  cursor: 'pointer', 
+                sx={{  
                   color:"#423333",
                 }}
-                onClick={() => navigate('/sign-in')}
               >
                 Already have an account?{' '}
                 <Typography 
                   component="span" 
-                  sx={{ textDecoration: 'underline', '&:hover': {
+                  sx={{ 
+                    textDecoration: 'underline', 
+                    cursor: 'pointer',
+                    '&:hover': {
                     color: 'blue',
                   }}}
+                  onClick={() => navigate('/sign-in')}
                 >
                   Sign in
                 </Typography>

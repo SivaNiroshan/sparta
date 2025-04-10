@@ -10,9 +10,10 @@ const mockSetStatus = vi.fn();
 
 vi.mock("react-router-dom",()=>({
     useNavigate: ()=> mockNavigate
+
 }))
 
-describe("Sign In page tests",()=>{
+describe("Sign In Page",()=>{
     beforeEach(()=>{
         vi.clearAllMocks();
     })
@@ -33,4 +34,28 @@ describe("Sign In page tests",()=>{
         expect(await screen.findByText(/Email is required/i)).toBeInTheDocument();
         expect(await screen.findByText(/Password is required/i)).toBeInTheDocument();
       });
+
+      it("should navigate to home after log in successfull",async()=>{
+        render(<SignIn setStatus={mockSetStatus} />)
+
+        await userEvent.type(screen.getByLabelText("Email"), "test@example.com");
+        await userEvent.type(screen.getByLabelText("Password"), "ValidPass1!");
+        await userEvent.click(screen.getByRole('button', { name: /LogIn/i }));
+
+        expect(mockSetStatus).toHaveBeenCalledWith(true);
+        expect(mockNavigate).toHaveBeenCalledWith("/home");
+      })
+
+      it("should navigate to sign up page if user click signUp",async()=>{
+        render(<SignIn/>)
+        await userEvent.click(screen.getByText('Sign up'))
+        expect(mockNavigate).toHaveBeenCalledWith('/sign-up')
+      });
+
+      it("shoud show the forgotpassword popup when forgotpassword clicked",async()=>{
+        render(<SignIn/>)
+        await userEvent.click(screen.getByText('Forgot Password?'))
+        expect(screen.getByText('Forgot Password')).toBeInTheDocument();
+      });
+
 })

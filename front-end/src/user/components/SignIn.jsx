@@ -226,19 +226,22 @@ const SignIn = ({setStatus}) => {
               }} 
             />
             <Typography
-              sx={{ 
-                cursor: 'pointer', 
+              sx={{  
                 color: "#686666",
                 textAlign: 'center',
               }}
-              onClick={() => navigate('/sign-up')}
+              
             >
               New to Sparta?{' '}
               <Typography 
                 component="span" 
-                sx={{ textDecoration: 'underline', '&:hover': {
+                sx={{ 
+                  textDecoration: 'underline', 
+                  cursor: 'pointer',
+                  '&:hover': {
                   color: 'blue',
                 }}}
+                onClick={() => navigate('/sign-up')}
               >
                 Sign up
               </Typography>
