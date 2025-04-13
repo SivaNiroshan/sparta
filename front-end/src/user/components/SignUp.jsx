@@ -5,7 +5,6 @@ import {
   FormControl, 
   MenuItem, 
   Select, 
-  TextField, 
   Typography, 
   Checkbox, 
   ListItemText, 
@@ -15,6 +14,7 @@ import * as Yup from 'yup';
 import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Logo from './Logo';
+import FormTextField from './FormTextField';
 
 const SignUp = ({setStatus}) => {
   const navigate = useNavigate();
@@ -109,92 +109,19 @@ const SignUp = ({setStatus}) => {
               Create Account
             </Typography>
 
-            <Box sx={{ mb: 1 }}>
-              <Typography 
-                variant="subtitle3" 
-                component="label" 
-                htmlFor="firstName"
-                sx={{ 
-                  display: 'block', 
-                  mb: 0.5, 
-                  fontFamily: 'var(--font-display)'
-                }}
-              >
-                First Name
-              </Typography>
-              <TextField
-                id="firstName"
-                name="firstName"
-                placeholder="Enter first name here"
-                variant="outlined"
-                fullWidth
-                size="small"
-                value={formik.values.firstName}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                error={formik.touched.firstName && Boolean(formik.errors.firstName)}
-                helperText={formik.touched.firstName && formik.errors.firstName}
-                sx={{
-                  '& .MuiOutlinedInput-root': {
-                    backgroundColor: 'white ', 
-                    '& fieldset': {
-                      borderColor: '#BAE5F8', 
-                    },
-                    '&:hover fieldset': {
-                      borderColor: '#3C8EF8', 
-                    },
-                    '&.Mui-focused fieldset': {
-                      borderColor: 'blue', 
-                    },
-                    borderRadius:2
-                  },
-                }}
-                
-              />
-            </Box>
+            <FormTextField
+              id='firstName'
+              label='First Name'
+              placeholder="Enter first name here"
+              formik={formik}
+            /> 
 
-            <Box sx={{ mb: 1 }}>
-              <Typography 
-                variant="subtitle3" 
-                component="label" 
-                htmlFor="lastName"
-                sx={{ 
-                  display: 'block', 
-                  mb: 0.5,
-                  fontFamily: 'var(--font-display)'
-                }}
-              >
-                Last Name
-              </Typography>
-              <TextField
-                id="lastName"
-                name="lastName"
-                placeholder="Enter last name here"
-                variant="outlined"
-                fullWidth
-                size="small"
-                value={formik.values.lastName}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                error={formik.touched.lastName && Boolean(formik.errors.lastName)}
-                helperText={formik.touched.lastName && formik.errors.lastName}
-                sx={{
-                  '& .MuiOutlinedInput-root': {
-                    backgroundColor: 'white ', 
-                    '& fieldset': {
-                      borderColor: '#BAE5F8', 
-                    },
-                    '&:hover fieldset': {
-                      borderColor: '#3C8EF8', 
-                    },
-                    '&.Mui-focused fieldset': {
-                      borderColor: 'blue', 
-                    },
-                    borderRadius:2
-                  },
-                }}
-              />
-            </Box>
+            <FormTextField
+              id='lastName'
+              label='Last Name'
+              placeholder="Enter last name here"
+              formik={formik}
+            />  
 
             <Box sx={{ mb: 1 }}>
               <Typography 
@@ -257,138 +184,30 @@ const SignUp = ({setStatus}) => {
               </FormControl>
             </Box>
 
-            <Box sx={{ mb: 1 }}>
-              <Typography 
-                variant="subtitle3" 
-                component="label" 
-                htmlFor="email"
-                sx={{ 
-                  display: 'block', 
-                  mb: 0.5,
-                  fontFamily: 'var(--font-display)'
-                }}
-              >
-                Email
-              </Typography>
-              <TextField
-                id="email"
-                name="email"
-                placeholder="Enter email here"
-                type="email"
-                variant="outlined"
-                fullWidth
-                size="small"
-                value={formik.values.email}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                error={formik.touched.email && Boolean(formik.errors.email)}
-                helperText={formik.touched.email && formik.errors.email}
-                sx={{
-                  '& .MuiOutlinedInput-root': {
-                    backgroundColor: 'white ', 
-                    '& fieldset': {
-                      borderColor: '#BAE5F8', 
-                    },
-                    '&:hover fieldset': {
-                      borderColor: '#3C8EF8', 
-                    },
-                    '&.Mui-focused fieldset': {
-                      borderColor: 'blue', 
-                    },
-                    borderRadius:2
-                  },
-                }}
-              />
-            </Box>
+            <FormTextField
+              id='email'
+              label='Email'
+              type="email"
+              placeholder="Enter email here"
+              formik={formik}
+            /> 
+            
+            <FormTextField
+              id="password"
+              label="Password"
+              placeholder="Enter password here"
+              type="password"
+              formik={formik}
+            />
 
-            <Box sx={{ mb: 1 }}>
-              <Typography 
-                variant="subtitle3" 
-                component="label" 
-                htmlFor="password"
-                sx={{ 
-                  display: 'block', 
-                  mb: 0.5,
-                  fontFamily: 'var(--font-display)'
-                }}
-              >
-                Password
-              </Typography>
-              <TextField
-                id="password"
-                name="password"
-                placeholder="Enter password here"
-                type="password"
-                variant="outlined"
-                fullWidth
-                size="small"
-                value={formik.values.password}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                error={formik.touched.password && Boolean(formik.errors.password)}
-                helperText={formik.touched.password && formik.errors.password}
-                sx={{
-                  '& .MuiOutlinedInput-root': {
-                    backgroundColor: 'white ', 
-                    '& fieldset': {
-                      borderColor: '#BAE5F8', 
-                    },
-                    '&:hover fieldset': {
-                      borderColor: '#3C8EF8', 
-                    },
-                    '&.Mui-focused fieldset': {
-                      borderColor: 'blue', 
-                    },
-                    borderRadius:2
-                  },
-                }}
-              />
-            </Box>
-
-            <Box sx={{ mb: 2 }}>
-              <Typography 
-                variant="subtitle3" 
-                component="label" 
-                htmlFor="confirmPassword"
-                sx={{ 
-                  display: 'block', 
-                  mb: 0.5,
-                  fontFamily: 'var(--font-display)'
-                }}
-              >
-                Confirm Password
-              </Typography>
-              <TextField
-                id="confirmPassword"
-                name="confirmPassword"
-                placeholder="Re-enter password here"
-                type="password"
-                variant="outlined"
-                fullWidth
-                size="small"
-                value={formik.values.confirmPassword}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                error={formik.touched.confirmPassword && Boolean(formik.errors.confirmPassword)}
-                helperText={formik.touched.confirmPassword && formik.errors.confirmPassword}
-                sx={{
-                  '& .MuiOutlinedInput-root': {
-                    backgroundColor: 'white ', 
-                    '& fieldset': {
-                      borderColor: '#BAE5F8', 
-                    },
-                    '&:hover fieldset': {
-                      borderColor: '#3C8EF8', 
-                    },
-                    '&.Mui-focused fieldset': {
-                      borderColor: 'blue', 
-                    },
-                    borderRadius:2
-                  },
-                }}
-              />
-            </Box>
-
+            <FormTextField
+              id="confirmPassword"
+              label="Confirm Password"
+              placeholder="Re-enter password here"
+              type="password"
+              formik={formik}
+            />
+            
             <Box sx={{ 
               display: 'flex', 
               flexDirection: 'column',
