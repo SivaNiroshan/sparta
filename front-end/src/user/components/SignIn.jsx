@@ -6,8 +6,8 @@ import { useNavigate } from 'react-router-dom';
 import ForgotPassword from './ForgotPassword';
 import CreatePassword from './CreatePassword';
 import PropTypes from 'prop-types';
-import Logo from './Logo';
 import FormTextField from './FormTextField';
+import FormContainer from './FormContainer';
 
 const SignIn = ({setStatus}) => {
   const navigate = useNavigate();
@@ -43,140 +43,98 @@ const SignIn = ({setStatus}) => {
   });
 
   return (
-    <Box sx={{ 
-      position: 'relative',
-      minHeight: '100vh',
-      bgcolor: 'white',
-      padding: 1
-    }}>
-      <Logo />
-
-      <Box sx={{ 
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        padding:1,
-        minHeight: '100vh'
-      }}>
-        <Box 
-          sx={{ 
-            maxWidth: '400px',
-            width: '100%',
-            borderRadius: 2,
-            overflow: 'hidden',
-          }}
-        >
-          <Box 
-            component="form"
-            onSubmit={formik.handleSubmit}
+    <Box>
+      <FormContainer 
+        title='Log In'
+        formik={formik}
+      >            
+        <FormTextField
+          id="email"
+          label="Email"
+          placeholder="Enter email here"
+          type="email"
+          formik={formik}
+        />
+        <FormTextField
+          id="password"
+          label="Password"
+          placeholder="Enter password here"
+          type="password"
+          formik={formik}
+        />
+                    
+        <Box sx={{ 
+          display: 'flex', 
+          flexDirection: 'column',
+          justifyContent: 'space-between',
+          textAlign: "center", 
+          gap: 2, 
+          mt: 1
+        }}>
+          <Button 
+            type="submit" 
+            variant="contained" 
             sx={{ 
-              backgroundColor: "#BAE5F8",
-              padding: 3,
-              paddingTop: 2,
-              display: 'flex',
-              flexDirection: 'column',
-              gap: 1
-        
+              flex: 1,
+              backgroundColor: '#09BD66',
+              borderRadius: 1,
+              textTransform: 'none',
+              fontWeight: 'bold',
+              padding: '8px 16px',
+              '&:hover': {
+                backgroundColor: '#058D60',
+              }
             }}
           >
-            <Typography 
-              variant="h5" 
-              component="h1" 
-              sx={{ 
-                textAlign: 'center',
-                fontWeight: 'bold',
-                marginBottom: 2,
-              }}
-            >
-              Log In
-            </Typography>
-            <FormTextField
-              id="email"
-              label="Email"
-              placeholder="Enter email here"
-              type="email"
-              formik={formik}
-            />
-            <FormTextField
-              id="password"
-              label="Password"
-              placeholder="Enter password here"
-              type="password"
-              formik={formik}
-            />
-                        
-            <Box sx={{ 
-              display: 'flex', 
-              flexDirection: 'column',
-              justifyContent: 'space-between',
-              textAlign: "center", 
-              gap: 2, 
-              mt: 1
-            }}>
-              <Button 
-                type="submit" 
-                variant="contained" 
-                sx={{ 
-                  flex: 1,
-                  backgroundColor: '#09BD66',
-                  borderRadius: 1,
-                  textTransform: 'none',
-                  fontWeight: 'bold',
-                  padding: '8px 16px',
-                  '&:hover': {
-                    backgroundColor: '#058D60',
-                  }
-                }}
-              >
-                LogIn
-              </Button>
-              <Typography
-                sx={{ 
-                  cursor: 'pointer', 
-                  textDecoration: 'underline',
-                  color:"#423333",
-                  '&:hover': {
-                    color: '#3C8EF8',
-                  }
-                }}
-                onClick={()=>{setOpenForgotPassword(true)}}
-              >
-                Forgot Password?
-              </Typography>
-            </Box>
-            <Divider 
-              sx={{                
-                borderColor: "black",                
-                borderBottomWidth: 2,               
-                width: "100%",                
-                margin: "1rem 0"             
-              }} 
-            />
-            <Typography
-              sx={{  
-                color: "#686666",
-                textAlign: 'center',
-              }}
-              
-            >
-              New to Sparta?{' '}
-              <Typography 
-                component="span" 
-                sx={{ 
-                  textDecoration: 'underline', 
-                  cursor: 'pointer',
-                  '&:hover': {
-                  color: 'blue',
-                }}}
-                onClick={() => navigate('/sign-up')}
-              >
-                Sign up
-              </Typography>
-            </Typography>
-          </Box>
+            LogIn
+          </Button>
+          <Typography
+            sx={{ 
+              cursor: 'pointer', 
+              textDecoration: 'underline',
+              color:"#423333",
+              '&:hover': {
+                color: '#3C8EF8',
+              }
+            }}
+            onClick={()=>{setOpenForgotPassword(true)}}
+          >
+            Forgot Password?
+          </Typography>
         </Box>
-        {openForgotPassword && (
-        <Dialog open={open} onClose={()=>{setOpenForgotPassword(false)}}>
+        <Divider 
+          sx={{                
+            borderColor: "black",                
+            borderBottomWidth: 2,               
+            width: "100%",                
+            margin: "1rem 0"             
+          }} 
+        />
+        <Typography
+          sx={{  
+            color: "#686666",
+            textAlign: 'center',
+          }}
+          
+        >
+          New to Sparta?{' '}
+          <Typography 
+            component="span" 
+            sx={{ 
+              textDecoration: 'underline', 
+              cursor: 'pointer',
+              '&:hover': {
+              color: 'blue',
+            }}}
+            onClick={() => navigate('/sign-up')}
+          >
+            Sign up
+          </Typography>
+        </Typography>
+      </FormContainer>
+    
+      {openForgotPassword && (
+        <Dialog open={openForgotPassword} onClose={()=>{setOpenForgotPassword(false)}}>
           <DialogTitle sx={{textAlign:'center'}}>Forgot Password</DialogTitle>
           <DialogContent sx={{justifyContent:"center", alignItems:"center"}}>
             <ForgotPassword 
@@ -186,13 +144,12 @@ const SignIn = ({setStatus}) => {
           </DialogContent>
         </Dialog> )}
         {openCreatePassword && (
-        <Dialog open={open} onClose={()=>{setOpenCreatePassword(false)}}>
+        <Dialog open={openCreatePassword} onClose={()=>{setOpenCreatePassword(false)}}>
           <DialogTitle sx={{textAlign:'center'}}>Create New Password</DialogTitle>
           <DialogContent sx={{justifyContent:"center", alignItems:"center"}}>
             <CreatePassword setOpenCreatePassword = {setOpenCreatePassword}/>
           </DialogContent>
         </Dialog> )}
-      </Box>
     </Box>
   );
 };
